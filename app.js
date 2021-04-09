@@ -11,9 +11,10 @@ var userLog;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	if(userLog != undefined){
-		
-	}
+	$("#welcomeDiv").show();
+	$("#registerDiv").hide();
+	$("#loginDiv").hide();
+	$("#gameDiv").hide();
 	Start();
 });
 
@@ -180,17 +181,12 @@ function UpdatePosition() {
 
 
 function switchDivs(divStr){
-	var welDiv = document.getElementById("welcomDiv");
-	var regDiv = document.getElementById("registerDiv");
-	var logDiv = document.getElementById("loginDiv");
-	var gameDiv = document.getElementById("gameDiv");
-	var divElem = document.getElementById(divStr);
-	welDiv.style.display = "none";
-	regDiv.style.display = "none";
-	logDiv.style.display = "none";
-	gameDiv.style.display = "none";
+	$("#welcomeDiv").hide();
+	$("#registerDiv").hide();
+	$("#loginDiv").hide();
+	$("#gameDiv").hide();
 
-	divElem.style.display = "block";
+	$("#"+ divStr).show();
 }
 
 
@@ -202,8 +198,8 @@ function validateLoginForm(){
 		let psw = users[userName];
 		if (psw.localeCompare(password) === 0){
 				userLog = userName;
-				switchDivs("gameDiv")
-				return true;
+				switchDivs('gameDiv')
+				submittedForm.reset();
 		}
 		else{
 			alert("incorrect password or user_name! try again...")

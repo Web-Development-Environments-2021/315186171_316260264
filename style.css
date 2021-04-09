@@ -1,9 +1,9 @@
 #gameDiv{
-    display: block;
+    display: none;
 }
 
 #welcomeDiv{
-    display: none;
+    display: block;
 }
 
 #loginDiv{

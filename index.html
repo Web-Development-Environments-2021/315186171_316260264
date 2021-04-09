@@ -3,7 +3,7 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<!--link rel="stylesheet" type="text/css" href="style.css" /-->
 	</head>
 
 	<body>
@@ -13,7 +13,7 @@
 
 		<div id="menu">
 			<ul>
-				<li onclick="switchDivs('welcomDiv')"><a href="#welcome">Welcome</a></li>
+				<li onclick="switchDivs('welcomeDiv')"><a href="#welcome">Welcome</a></li>
 				<li onclick="switchDivs('registerDiv')"><a href="#register">Register</a></li>
 				<li onclick="switchDivs('loginDiv')"><a href="#login">Login</a></li>
 				<li onclick="switchDivs('gameDiv')"><a href="#new_Game">New Game</a></li>
@@ -21,7 +21,7 @@
 			  </ul>
 		</div>
 
-		<div id="welcomDiv">
+		<div id="welcomeDiv">
 			<h1>WELCOME</h1>
 			<center>
 				<img src="images/pac-man-logo.gif" width="400" height="400"/>
@@ -37,7 +37,7 @@
 
 		<div id="loginDiv">
 			<h1>Login</h1>
-			<form name="loginForm" method="POST" onsubmit="return validateLoginForm()">
+			<form name="loginForm" onsubmit="return validateLoginForm()">
 				<label for="userName"><b>Username</b></label>
 				<input type="text" placeholder="Enter Username" name="userName" required>
 				<br/>
