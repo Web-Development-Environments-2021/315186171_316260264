@@ -1,0 +1,15 @@
+#gameDiv{
+    display: block;
+}
+
+#welcomeDiv{
+    display: none;
+}
+
+#loginDiv{
+    display: none;
+}
+
+#registerDiv{
+    display: none;
+}

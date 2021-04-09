@@ -6,9 +6,14 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var users = {'k':'k'}
+var userLog;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
+	if(userLog != undefined){
+		
+	}
 	Start();
 });
 
@@ -69,7 +74,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 150);
 }
 
 function findRandomEmptyCell(board) {
@@ -169,4 +174,44 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+
+
+
+function switchDivs(divStr){
+	var welDiv = document.getElementById("welcomDiv");
+	var regDiv = document.getElementById("registerDiv");
+	var logDiv = document.getElementById("loginDiv");
+	var gameDiv = document.getElementById("gameDiv");
+	var divElem = document.getElementById(divStr);
+	welDiv.style.display = "none";
+	regDiv.style.display = "none";
+	logDiv.style.display = "none";
+	gameDiv.style.display = "none";
+
+	divElem.style.display = "block";
+}
+
+
+function validateLoginForm(){
+	var submittedForm = document.forms["loginForm"];
+	var userName = submittedForm["userName"].value;
+	var password = submittedForm["password"].value;	
+	if(userName in users){
+		let psw = users[userName];
+		if (psw.localeCompare(password) === 0){
+				userLog = userName;
+				switchDivs("gameDiv")
+				return true;
+		}
+		else{
+			alert("incorrect password or user_name! try again...")
+			return false;
+		}
+	}
+	else{
+		alert("incorrect password or user_name! try again...")
+	}
+	return false;
 }

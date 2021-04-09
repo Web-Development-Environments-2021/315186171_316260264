@@ -3,19 +3,67 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 
 	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+		<header>
+			
+		</header>
+
+		<div id="menu">
+			<ul>
+				<li onclick="switchDivs('welcomDiv')"><a href="#welcome">Welcome</a></li>
+				<li onclick="switchDivs('registerDiv')"><a href="#register">Register</a></li>
+				<li onclick="switchDivs('loginDiv')"><a href="#login">Login</a></li>
+				<li onclick="switchDivs('gameDiv')"><a href="#new_Game">New Game</a></li>
+				<li style="float:right"><a class="active" href="#about">About</a></li>
+			  </ul>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
+
+		<div id="welcomDiv">
+			<h1>WELCOME</h1>
+			<center>
+				<img src="images/pac-man-logo.gif" width="400" height="400"/>
+				<br>
+				<button class="welcomeBot" onclick="switchDivs('registerDiv')">REGISTER</button>
+				<button class="welcomeBot" onclick="switchDivs('loginDiv')">LOGIN</button>
+			</center>
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+
+		<div id="registerDiv">
+			<h1>Register</h1>
 		</div>
+
+		<div id="loginDiv">
+			<h1>Login</h1>
+			<form name="loginForm" method="POST" onsubmit="return validateLoginForm()">
+				<label for="userName"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="userName" required>
+				<br/>
+				<label for="password"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="password" required>
+				<br/>
+				<button type="submit">Login</button>
+			</form>
+		</div>
+		
+		<div id="gameDiv">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<div id="game">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
+		</div>
+		
+		<footer>
+
+		</footer>
 	</body>
 </html>
