@@ -3,7 +3,10 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<!--link rel="stylesheet" type="text/css" href="style.css" /-->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+		
 	</head>
 
 	<body>
@@ -33,6 +36,31 @@
 
 		<div id="registerDiv">
 			<h1>Register</h1>
+			<form action="" name="registerForm" id="registerForm">
+
+				<label for="username">User Name</label>
+				<input type="text" name="username" id="username" placeholder="Enter User Name"/>
+				<br>
+				<label for="passWord">Password</label>
+				<input type="password" name="passWord" id="passWord" placeholder="Enter Password"/>
+				<br>
+				<label for="firstname">First Name</label>
+				<input type="text" name="firstname" id="firstname" placeholder="Enter firstname"/>
+				<br>
+				<label for="lastname">Last Name</label>
+				<input type="text" name="lastname" id="lastname" placeholder="Enter lastname"/>
+				<br>
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" placeholder="Enter Email"/>
+				<br>
+				<label for="start">Date of birth</label>
+				<input type="date" id="birth" name="birth"
+					value="2000-07-06"
+					min="1900-01-01" max="2020-12-31">
+				<br>
+				<button type="submit">Register</button>
+			
+			  </form>
 		</div>
 
 		<div id="loginDiv">
@@ -48,6 +76,72 @@
 			</form>
 		</div>
 		
+		<div id="configurationDiv">
+			<h1>configuration</h1>
+			<form action="" name="configurationForm" id="configurationForm">
+				<label for="upKey">Up Key</label>
+				<input type="text" name="upKey" onkeydown="kyeConfig(event, this)" id="upKey" value="ArrowUp" placeholder="configurate up key"/>
+				<br>
+
+				<label for="downKey">Down Key</label>
+				<input type="text" name="downKey" onkeydown="kyeConfig(event, this)" id="downKey" value="ArrowDown" placeholder="configurate down key"/>
+				<br>
+
+				<label for="leftKey">Left Key</label>
+				<input type="text" name="leftKey" id="leftKey" onkeydown="kyeConfig(event, this)" value="ArrowLeft" placeholder="configurate left key"/>
+				<br>
+
+				<label for="rightKey">Right Key</label>
+				<input type="text" name="rightKey" id="rightKey" onkeydown="kyeConfig(event, this)" value="ArrowRight" placeholder="configurate right key"/>
+				<br>
+				
+				<label for="ballsRange">Balls in game</label>
+				<input type="range" min="50" max="90" value="70" class="slider" id="ballsRange">
+				<p>Amount: <span id="ballsAmount"></span></p>
+				<script>
+					var slider = document.getElementById("ballsRange");
+					var output = document.getElementById("ballsAmount");
+					output.innerHTML = slider.value;
+					
+					slider.oninput = function() {
+					  output.innerHTML = this.value;
+					}
+				</script>
+				<br>
+
+				<label for="smallColor">Select Clolor for the 5 points ball:</label>
+  				<input type="color" id="smallColor" name="smallColor" value="#04ff00"><br>
+				<br>
+
+				<label for="mediumColor">Select Clolor for the 15 points ball:</label>
+  				<input type="color" id="mediumColor" name="mediumColor" value="#ff0000"><br>
+				<br>
+
+				<label for="largeColor">Select Clolor for the 25 points ball:</label>
+  				<input type="color" id="largeColor" name="largeColor" value="#1100ff"><br>
+				<br>
+
+				<label for="quantity">Select how much game time:</label>
+  				<input type="number" id="quantity" name="quantity" value="60" min="60">
+				<br>
+
+				<p>Select number of monsters:</p>
+				<input type="radio" id="monter1" name="monsters" value="1">
+				<label for="monter1">1</label><br>
+				<input type="radio" id="monster2" name="monsters" value="2">
+				<label for="monster2">2</label><br>
+				<input type="radio" id="monster3" name="monsters" value="3">
+				<label for="monster3">3</label>
+				<input type="radio" id="monster4" name="monsters" value="4">
+				<label for="monster4">4</label>
+				<br>
+
+				<button onclick="randonConfiguration()">Random</button>
+				<button type="submit">Start Game</button>
+
+			</form>
+		</div>
+
 		<div id="gameDiv">
 			<div id="score">
 				<label for="lblScore">SCORE:</label>

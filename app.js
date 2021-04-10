@@ -8,15 +8,90 @@ var time_elapsed;
 var interval;
 var users = {'k':'k'}
 var userLog;
+var keysControls = {'keyUp': 38, 'keyDown': 40, 'keyLeft': 37, 'keyRight': 39}
+
+
 
 $(document).ready(function() {
+	switchDivs('configurationDiv')
+
+	$('#registerForm').validate({
+		rules: {
+			firstname: {
+				required: true,
+				lettersonly: true
+			},
+			lastname: {
+				required: true,
+				lettersonly: true
+			},
+			email: {
+			  required: true,
+			  email: true
+			},
+			passWord: {
+			  required: true,
+			  minlength: 6,
+			  strongPassword: true
+			},
+			username: {
+				required: true,
+				validateUserName: true
+			}
+		  },
+		  // Specify validation error messages
+		  messages: {
+			firstname: {
+				required: "Please enter your first name",
+				lettersonly: "First name must contains letters only"
+			},
+			lastname:  {
+				required: "Please enter your last name",
+				lettersonly: "Last name must contains letters only"
+			},
+			passWord: {
+			  required: "Please provide a password",
+			  minlength: "Your password must be at least 6 characters long",
+			  strongPassword: "Your password must contains letters and numbers"
+			},
+			email: {
+				required: "Please enter your email",
+				email: "Please enter a valid email address"
+			},
+			username: {
+				required: "Please enter your user name",
+				validateUserName: "User name you choose already exist"
+			}
+		  },
+		  submitHandler: function(form) {
+			register();
+
+			let regForm = $("#registerForm");
+			regForm[0].reset();
+		  }
+
+	});
+
 	context = canvas.getContext("2d");
-	$("#welcomeDiv").show();
-	$("#registerDiv").hide();
-	$("#loginDiv").hide();
-	$("#gameDiv").hide();
 	Start();
 });
+
+$(function() {
+	$.validator.addMethod('validateUserName', function (value, element) {
+		return !(value in users);
+	});
+
+	$.validator.addMethod('strongPassword', function (value, element) {
+		return this.optional(element) || /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(value);
+	});
+});
+
+
+function kyeConfig(event, inputField){
+	alert(event.keyCode);
+	event.preventDefault();
+	inputField.value = event.key;
+}
 
 function Start() {
 	board = new Array();
@@ -89,16 +164,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[keysControls['keyUp']]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[keysControls['keyDown']]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[keysControls['keyLeft']]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[keysControls['keyRight']]) {
 		return 4;
 	}
 }
@@ -185,6 +260,7 @@ function switchDivs(divStr){
 	$("#registerDiv").hide();
 	$("#loginDiv").hide();
 	$("#gameDiv").hide();
+	$("#configurationDiv").hide();
 
 	$("#"+ divStr).show();
 }
@@ -210,4 +286,14 @@ function validateLoginForm(){
 		alert("incorrect password or user_name! try again...")
 	}
 	return false;
+}
+
+
+function register(){
+	let username = document.getElementById("username").value;
+	let password = document.getElementById("passWord").value;
+
+	users[username] = password;
+
+	switchDivs('loginDiv');
 }
