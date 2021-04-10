@@ -80,19 +80,19 @@
 			<h1>configuration</h1>
 			<form action="" name="configurationForm" id="configurationForm">
 				<label for="upKey">Up Key</label>
-				<input type="text" name="upKey" onkeydown="kyeConfig(event, this)" id="upKey" value="ArrowUp" placeholder="configurate up key"/>
+				<input type="text" name="upKey" id="upKey" onkeydown="kyeConfig(event, this)" value="ArrowUp" placeholder="configurate up key" required/>
 				<br>
 
 				<label for="downKey">Down Key</label>
-				<input type="text" name="downKey" onkeydown="kyeConfig(event, this)" id="downKey" value="ArrowDown" placeholder="configurate down key"/>
+				<input type="text" name="downKey" id="downKey" onkeydown="kyeConfig(event, this)" value="ArrowDown" placeholder="configurate down key" required/>
 				<br>
 
 				<label for="leftKey">Left Key</label>
-				<input type="text" name="leftKey" id="leftKey" onkeydown="kyeConfig(event, this)" value="ArrowLeft" placeholder="configurate left key"/>
+				<input type="text" name="leftKey" id="leftKey" onkeydown="kyeConfig(event, this)" value="ArrowLeft" placeholder="configurate left key" required/>
 				<br>
 
 				<label for="rightKey">Right Key</label>
-				<input type="text" name="rightKey" id="rightKey" onkeydown="kyeConfig(event, this)" value="ArrowRight" placeholder="configurate right key"/>
+				<input type="text" name="rightKey" id="rightKey" onkeydown="kyeConfig(event, this)" value="ArrowRight" placeholder="configurate right key" required/>
 				<br>
 				
 				<label for="ballsRange">Balls in game</label>
@@ -121,8 +121,8 @@
   				<input type="color" id="largeColor" name="largeColor" value="#1100ff"><br>
 				<br>
 
-				<label for="quantity">Select how much game time:</label>
-  				<input type="number" id="quantity" name="quantity" value="60" min="60">
+				<label for="timer">Select how much game time:</label>
+  				<input type="number" id="timer" name="timer" value="60" min="60" required>
 				<br>
 
 				<p>Select number of monsters:</p>
@@ -132,7 +132,7 @@
 				<label for="monster2">2</label><br>
 				<input type="radio" id="monster3" name="monsters" value="3">
 				<label for="monster3">3</label>
-				<input type="radio" id="monster4" name="monsters" value="4">
+				<input type="radio" id="monster4" name="monsters" value="4" checked>
 				<label for="monster4">4</label>
 				<br>
 

@@ -8,12 +8,22 @@ var time_elapsed;
 var interval;
 var users = {'k':'k'}
 var userLog;
+var ballsAmpunt = 70;
+var smallBallColor = '#04ff00';
+var mediumBallColor = '#ff0000';
+var largeBallColor = '#1100ff';
+var time_remaining = 60;
+var monstersAmount = 4;
 var keysControls = {'keyUp': 38, 'keyDown': 40, 'keyLeft': 37, 'keyRight': 39}
+var tmpUpKey = 38;
+var tmpDownKey = 40;
+var tmpLeftKey = 37;
+var tmpRightKey = 39;
 
 
 
 $(document).ready(function() {
-	switchDivs('configurationDiv')
+	switchDivs('configurationDiv');
 
 	$('#registerForm').validate({
 		rules: {
@@ -72,6 +82,45 @@ $(document).ready(function() {
 
 	});
 
+	$('#configurationForm').validate({
+		rules: {
+			upKey: {
+				differentKey: '#upKey'
+			},
+			downKey: {
+				differentKey: '#downKey'
+			},
+			leftKey:{
+				differentKey: '#leftKey'
+			},
+			rightKey:{
+				differentKey: '#rightKey'
+			}
+		},
+
+		messages: {
+			downKey: {
+				differentKey: 'There is already an identicall key selected'
+			},
+			leftKey:{
+				differentKey: 'There is already an identicall key selected'
+			},
+			rightKey:{
+				differentKey: 'There is already an identicall key selected'
+			},
+			upKey:{
+				differentKey: 'There is already an identicall key selected'
+			}
+		},
+
+		submitHandler: function(form) {
+			configurate();
+
+			let regForm = $("#configurationForm");
+			regForm[0].reset();
+		  }
+	});
+
 	context = canvas.getContext("2d");
 	Start();
 });
@@ -84,13 +133,45 @@ $(function() {
 	$.validator.addMethod('strongPassword', function (value, element) {
 		return this.optional(element) || /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(value);
 	});
+
+	$.validator.addMethod('differentKey', function (value, element, param) {
+		let comp = true;
+		if (param.localeCompare('#upKey') != 0){
+			let val = document.getElementById("upKey").value;
+			comp = comp && value.localeCompare(val) != 0;
+		}
+		if (param.localeCompare('#leftKey') != 0){
+			let val = document.getElementById("leftKey").value;
+			comp = comp && value.localeCompare(val) != 0;
+		}
+		if (param.localeCompare('#downKey') != 0){
+			let val = document.getElementById("downKey").value;
+			comp = comp && value.localeCompare(val) != 0;
+		}
+		if (param.localeCompare('#rightKey') != 0){
+			let val = document.getElementById("rightKey").value;
+			comp = comp && value.localeCompare(val) != 0;
+		}
+		return comp;
+	});
 });
 
 
 function kyeConfig(event, inputField){
-	alert(event.keyCode);
 	event.preventDefault();
 	inputField.value = event.key;
+	if(inputField.id.localeCompare('upKey') == 0){
+		tmpUpKey = event.keyCode;
+	}
+	else if(inputField.id.localeCompare('downKey') == 0){
+		tmpDownKey = event.keyCode;
+	}
+	else if(inputField.id.localeCompare('leftKey') == 0){
+		tmpLeftKey = event.keyCode;
+	}
+	else if(inputField.id.localeCompare('rightKey') == 0){
+		tmpRightKey = event.keyCode;
+	}
 }
 
 function Start() {
@@ -254,7 +335,6 @@ function UpdatePosition() {
 
 
 
-
 function switchDivs(divStr){
 	$("#welcomeDiv").hide();
 	$("#registerDiv").hide();
@@ -297,3 +377,34 @@ function register(){
 
 	switchDivs('loginDiv');
 }
+
+
+function configurate(){
+	keysControls['keyUp'] = tmpUpKey;
+	keysControls['keyDown'] = tmpDownKey;
+	keysControls['keyLeft'] = tmpLeftKey;
+	keysControls['keyRight'] = tmpRightKey;
+
+	ballsAmpunt = parseInt(document.getElementById("ballsRange").value);
+
+	smallBallColor = document.getElementById("smallColor").value;
+	mediumBallColor = document.getElementById("mediumColor").value;
+	largeBallColor = document.getElementById("largeColor").value;
+
+	time_remaining = parseInt(document.getElementById("timer").value);
+
+	var radios = document.getElementsByName('monsters');
+
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			// do whatever you want with the checked radio
+			monstersAmount = parseInt(radios[i].value);
+
+			// only one radio can be logically checked, don't check the rest
+			break;
+		}
+	}
+
+	switchDivs('gameDiv');
+}
+
