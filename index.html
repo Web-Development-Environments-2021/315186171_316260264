@@ -11,7 +11,13 @@
 
 	<body>
 		<header>
-			
+			<img id="logo_head" src="images/header_logo.png"/>
+			<h1>Pac Man 2: more pac more man</h1>
+			<p style="float: right;">
+				Name: Yotam Komp ,Id: 315186171
+				<br>
+				Name: Ili Shmidt ,Id: 316260264
+			</p>
 		</header>
 
 		<div id="menu">
@@ -19,15 +25,64 @@
 				<li onclick="switchDivs('welcomeDiv')"><a href="#welcome">Welcome</a></li>
 				<li onclick="switchDivs('registerDiv')"><a href="#register">Register</a></li>
 				<li onclick="switchDivs('loginDiv')"><a href="#login">Login</a></li>
-				<li onclick="switchDivs('gameDiv')"><a href="#new_Game">New Game</a></li>
-				<li style="float:right"><a class="active" href="#about">About</a></li>
-			  </ul>
+				<li onclick="switchDivs('configurationDiv')"><a href="#new_Game">New Game</a></li>
+				<li id="about_li"><a class="active" href="#about">About</a></li>
+			</ul>
 		</div>
 
+		<div id="myModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>ABOUT</h2>
+			  </div>
+			  <div class="modal-body">
+				<p>JQuery Plugin used: validate for the register form.<br>
+				source:<br> 1) https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js <br>
+				2) https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js</p>
+				<p>There was no use in any template.</p>
+				<p>The hardest thing about this project was to place the html object at our desired area in the page</p>
+			  </div>
+			  <div class="modal-footer">
+				<h3>Names:<br>Yotam Komp<br>Ili Shmidt</h3>
+			  </div>
+			</div>
+		  
+		</div>
+		<script>
+			// Get the modal
+			var modal = document.getElementById("myModal");
+			
+			// Get the button that opens the modal
+			var btn = document.getElementById("about_li");
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal 
+			btn.onclick = function() {
+			  modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			  modal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			  if (event.target == modal) {
+				modal.style.display = "none";
+			  }
+			}
+		</script>
+		
 		<div id="welcomeDiv">
 			<h1>WELCOME</h1>
 			<center>
-				<img src="images/pac-man-logo.gif" width="400" height="400"/>
+				<img src="images/pac-man-logo.gif" width="350" height="300"/>
 				<br>
 				<button class="welcomeBot" onclick="switchDivs('registerDiv')">REGISTER</button>
 				<button class="welcomeBot" onclick="switchDivs('loginDiv')">LOGIN</button>
@@ -67,12 +122,14 @@
 			<h1>Login</h1>
 			<form name="loginForm" onsubmit="return validateLoginForm()">
 				<label for="userName"><b>Username</b></label>
+				<br>
 				<input type="text" placeholder="Enter Username" name="userName" required>
 				<br/>
 				<label for="password"><b>Password</b></label>
 				<input type="password" placeholder="Enter Password" name="password" required>
 				<br/>
 				<button type="submit">Login</button>
+				<a href="#" onclick="switchDivs('registerDiv')">Don't have an account?</a>
 			</form>
 		</div>
 		
@@ -107,7 +164,6 @@
 					  output.innerHTML = this.value;
 					}
 				</script>
-				<br>
 
 				<label for="smallColor">Select Clolor for the 5 points ball:</label>
   				<input type="color" id="smallColor" name="smallColor" value="#04ff00"><br>
@@ -126,15 +182,22 @@
 				<br>
 
 				<p>Select number of monsters:</p>
-				<input type="radio" id="monter1" name="monsters" value="1">
-				<label for="monter1">1</label><br>
-				<input type="radio" id="monster2" name="monsters" value="2">
-				<label for="monster2">2</label><br>
-				<input type="radio" id="monster3" name="monsters" value="3">
-				<label for="monster3">3</label>
-				<input type="radio" id="monster4" name="monsters" value="4" checked>
-				<label for="monster4">4</label>
-				<br>
+				<label class="container">1
+					<input type="radio" name="monsters" value="1">
+					<span class="checkmark"></span>
+				  </label>
+				  <label class="container">2
+					<input type="radio" name="monsters" value="2">
+					<span class="checkmark"></span>
+				  </label>
+				  <label class="container">3
+					<input type="radio" name="monsters" value="3">
+					<span class="checkmark"></span>
+				  </label>
+				  <label class="container">4
+					<input type="radio" name="monsters" value="4" checked>
+					<span class="checkmark"></span>
+				  </label>
 
 				<button type="button" onclick="randonConfiguration()">Random</button>
 				<button type="submit">Start Game</button>
@@ -143,21 +206,84 @@
 		</div>
 
 		<div id="gameDiv">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
-			</div>
+			<audio id="main_sound" src="music/Relax 1 min - Sunset, Ocean, Moon - Relaxing Music.mp3" type="audio/mpeg" preload="auto" loop ></audio>
+			<table>
+				<tr>
+					<td id="game_td">
+						<div id="game">
+							<div id="score">
+								<label class="data" for="lblScore">SCORE:</label>
+								<input class="data" id="lblScore" type="text" readonly/>
+							</div>
+							<div id="time">
+								<label class="data" for="lblTime">TIME:</label>
+								<input class="data" id="lblTime" type="text" readonly/>
+							</div>
+							<div id="lives">
+								<label class="data" for="lblLives">Lives:</label>
+								<input class="data" id="lblLives" type="text" readonly/>
+							</div>
+							<div id="names">
+								<label class="data">PacMan Name: <span id="lblName"> </span></label>
+							</div>
+							<canvas id="canvas" height="450" width="600"></canvas>
+						</div>
+					</td>
+					<td id="setting_td">
+						<div id="gameSetting">
+							<h3><u>Game Setting:</u></h3>
+							<p>
+								Game Duration: <span id="game_dur"> </span>
+								<br>
+								<br>
+								Move Up: <span id="moveUp"> </span>
+								<br>
+								Move Down: <span id="moveDown"> </span>
+								<br>
+								Move Left: <span id="moveLeft"> </span>
+								<br>
+								Move Right: <span id="moveRight"> </span>
+								<br>
+								<br>
+								5-Point color: <span id="color-5">.......</span>
+								<br>
+								15-Point color: <span id="color-15">.......</span>
+								<br>
+								25-Point color: <span id="color-25">.......</span>
+								<br>
+								<br>
+								5-Point amount: <span id="amount-5"> </span>
+								<br>
+								15-Point amount: <span id="amount-15"> </span>
+								<br>
+								25-Point amount: <span id="amount-25"> </span>
+								<br>
+								<br>
+								Ghosts Amount: <span id="ghost_amount"> </span>
+								<br>
+								<br>
+								<b>Heart</b> - appers randomly for 20s and by eating it you recive an extra life.
+								<br>
+								<br>
+								<b>Clock</b> - appers randomly for 20s and by eating it you get an extra 10s to the game.
+							</p>
+							<button type="button" onclick="switchDivs('configurationDiv')"><b>Start New Game</b></button>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 		
 		<footer>
-
+			<p>
+			This game was forged by Odin himself from the heart of a dying star, and was used to defete the the ice monsters in the battle of the gods.
+			Now it's being use to spread joy around the world for people to play and pass the time with,
+			and the people behind the scene who make sure everything is working properly are:<br>
+			<b>
+			<span class="contact">Yotam Komp at kompy@post.bgu.ac.il, </span>
+			<span class="contact">Ili Shmidt at ili@post.bgu.ac.il</span>
+			</b>
+			</p>
 		</footer>
 	</body>
 </html>
