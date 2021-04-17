@@ -3,7 +3,7 @@ https://web-development-environments-2021.github.io/assignment2-yk6700/
 
 Submitters:
 
-Yotam Komp 315186171,
+Yotam Komp 315186171
 
 Ili Shmidt 316260264
 
