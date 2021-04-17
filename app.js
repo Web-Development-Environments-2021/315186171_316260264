@@ -308,6 +308,7 @@ function GetKeyPressed() {
 	if (keysDown[keysControls['keyRight']]) {
 		return 4;
 	}
+	return -1;
 }
 
 function Draw() {
@@ -483,6 +484,8 @@ function UpdatePacManPosition(){
 	board[pacMan.row][pacMan.col] = [boardEnum.empty];
 
 	let move = GetKeyPressed();
+	if(move != -1)
+		pacMan.draw = move;
 
 	if (move == 1 && pacMan.row > 0 && board[pacMan.row - 1][pacMan.col][0] != boardEnum.wall) {
 
