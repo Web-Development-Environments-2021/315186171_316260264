@@ -1142,7 +1142,7 @@ function register(){
 
 	users[username] = password;
 
-	switchDivs('loginDiv');
+	switchDivs('welcomeDiv');
 }
 
 
