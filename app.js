@@ -470,7 +470,7 @@ function drawObject(i, j, cell_object, min_radius, center){
 	}
 	else if(cell_object == boardEnum.watch){
 		let watch_img = new Image();
-		watch_img.src = "images/watch.jpg";
+		watch_img.src = "images/watch.png";
 		context.drawImage(watch_img, center.x, center.y, cell_width, cell_height);
 	}
 	else if(cell_object == boardEnum.heart){
@@ -564,7 +564,7 @@ function UpdatePacManPosition(){
 	else if (isAllCandyEaten()) {
 		clearIntervals();
 		Draw();
-
+		
 		window.alert("Winner!!!\nYour Score : " + score);
 	} else if(checkIfPacManHitGhost()){
 		let disqualify = checkDisqualify();
@@ -986,7 +986,7 @@ function placeGhosts(){
 		ghosts[1].row = 14;
 		ghosts[1].col = 0;
 		ghosts[1].draw = new Image();
-		ghosts[1].draw.src = "images/ghost_2.jpg";
+		ghosts[1].draw.src = "images/ghost_2.png";
 		ghosts[1].last_place = [ghosts[1].row, ghosts[1].col];
 	}
 
