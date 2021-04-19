@@ -269,7 +269,7 @@ function Start() {
 	);
 	pacMan_interval = setInterval(UpdatePacManPosition, 100);
 	ghosts_interval = setInterval(UpdateGhostPosition, 400);
-	special_food_interval = setInterval(MoveSpecialFood, 300);
+	special_food_interval = setInterval(MoveSpecialFood, 400);
 	watch_interval = setInterval(resetWatch, 20000);
 	heart_inrerval = setInterval(resetHeart, 20000);
 }
